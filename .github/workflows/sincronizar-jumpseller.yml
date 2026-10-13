@@ -1,0 +1,65 @@
+name: Actualizar catálogo desde Jumpseller
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: catalogo-comprame-wacho-pages
+  cancel-in-progress: true
+
+jobs:
+  catalogo:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Descargar el repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Verificar credenciales
+        id: auth
+        env:
+          JUMPSELLER_LOGIN: ${{ secrets.JUMPSELLER_LOGIN }}
+          JUMPSELLER_AUTH_TOKEN: ${{ secrets.JUMPSELLER_AUTH_TOKEN }}
+        run: |
+          if [ -n "$JUMPSELLER_LOGIN" ] && [ -n "$JUMPSELLER_AUTH_TOKEN" ]; then
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "::notice::Faltan las credenciales de Jumpseller; se conserva el catálogo publicado."
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Consultar inventario y generar catálogo
+        if: steps.auth.outputs.ready == 'true'
+        env:
+          JUMPSELLER_LOGIN: ${{ secrets.JUMPSELLER_LOGIN }}
+          JUMPSELLER_AUTH_TOKEN: ${{ secrets.JUMPSELLER_AUTH_TOKEN }}
+        run: python scripts/sync_catalog.py
+
+      - name: Configurar GitHub Pages
+        if: steps.auth.outputs.ready == 'true'
+        uses: actions/configure-pages@v5
+
+      - name: Subir catálogo
+        if: steps.auth.outputs.ready == 'true'
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: public
+
+      - name: Publicar catálogo
+        if: steps.auth.outputs.ready == 'true'
+        id: deployment
+        uses: actions/deploy-pages@v4
