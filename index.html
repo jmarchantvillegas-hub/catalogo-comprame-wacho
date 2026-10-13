@@ -17,16 +17,24 @@
 @media print{.state-legend{display:none}}
 
 /* Contadores que responden a filtros combinados. No alteran el stock real. */
-.filtered-inventory{margin:16px 0 18px;border:1px solid #d9e1ed;border-radius:13px;background:#f0f3f8;padding:14px 16px}
-.filtered-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}
-.filtered-heading strong{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#39465b}
-.filtered-heading small{font-size:11px;color:#637087}
-.filtered-metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
-.filtered-metric{background:#fff;border:1px solid #e0e6ef;border-radius:10px;padding:12px 13px}
-.filtered-metric span{display:block;font-size:11px;font-weight:650;color:#606c7e;line-height:1.3}
-.filtered-metric strong{display:block;font-size:clamp(21px,2.8vw,30px);font-variant-numeric:tabular-nums;letter-spacing:-.04em;margin-top:3px;color:#172236}
-.filtered-note{font-size:11px;color:#6b7585;margin-top:10px}
-@media(max-width:660px){.filtered-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.filtered-inventory{padding:12px}.filtered-metric{padding:10px}}
+.filtered-inventory{margin:18px 0 20px;border:1px solid #263b59;border-radius:16px;background:linear-gradient(120deg,#152239 0%,#243959 100%);box-shadow:0 10px 22px rgba(17,33,57,.12);padding:18px 20px}
+.filtered-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px}
+.filtered-heading strong{font-size:13px;letter-spacing:.07em;text-transform:uppercase;color:#fff}
+.filtered-heading small{font-size:11px;color:#c7d5eb}
+.filtered-metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:11px}
+.filtered-metric{border:1px solid transparent;border-radius:12px;padding:13px 14px;box-shadow:0 2px 5px rgba(10,25,48,.08)}
+.filtered-metric:nth-child(1){background:#e9f2ff;border-color:#a9caf9}
+.filtered-metric:nth-child(2){background:#edeaff;border-color:#c7bbfa}
+.filtered-metric:nth-child(3){background:#e5f7ed;border-color:#a5dfbd}
+.filtered-metric:nth-child(4){background:#fff2d9;border-color:#efd099}
+.filtered-metric span{display:block;font-size:11px;font-weight:750;line-height:1.35}
+.filtered-metric strong{display:block;font-size:clamp(24px,2.8vw,32px);font-variant-numeric:tabular-nums;letter-spacing:-.04em;margin-top:6px}
+.filtered-metric:nth-child(1) span,.filtered-metric:nth-child(1) strong{color:#174b91}
+.filtered-metric:nth-child(2) span,.filtered-metric:nth-child(2) strong{color:#4a319b}
+.filtered-metric:nth-child(3) span,.filtered-metric:nth-child(3) strong{color:#13643a}
+.filtered-metric:nth-child(4) span,.filtered-metric:nth-child(4) strong{color:#82530c}
+.filtered-note{font-size:11px;color:#cbd7e8;margin-top:12px;line-height:1.5}
+@media(max-width:660px){.filtered-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.filtered-inventory{padding:14px}.filtered-metric{padding:12px}.filtered-heading{align-items:flex-start;flex-direction:column;gap:2px}}
 </style></head><body><div class="wrap"><header><div><div class="eyebrow">Comprame Wacho • Informe de inventario</div><h1>Stock por modelo, color y talla</h1><div class="sub">Fotografías y cantidades tomadas del CSV de Jumpseller · datos del 10/10/2026</div></div><div class="snapshot">Corte del archivo<br><b>10 de octubre de 2026</b></div></header>
 <section class="stats"><div class="stat"><label>Modelos en catálogo</label><strong>78</strong></div><div class="stat"><label>Modelos con unidades</label><strong>36</strong></div><div class="stat"><label>Unidades registradas</label><strong>2.285</strong></div><div class="stat"><label>Modelos sin unidades</label><strong>42</strong></div></section>
 <div class="alert"><strong>Atención:</strong> 11 modelos con stock registrado figuran como «No disponible» en Jumpseller (1.002 unidades). Este informe muestra el stock del archivo, no confirma disponibilidad para venta. Los productos que requieren revisión aparecen marcados.</div>
