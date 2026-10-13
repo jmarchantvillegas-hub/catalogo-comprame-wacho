@@ -135,7 +135,7 @@ def card(product, index):
     html = (
         f'<article class="product {"with" if has_stock else "without"}" '
         f'data-name="{safe(name.lower())}" data-brand="{safe(brand.lower())}" '
-        f'data-status="{safe(status)}" data-stock="{units}">'
+        f'data-status="{safe(status)}" data-stock="{units}" data-finite="{finite}" data-infinite="{str(infinite).lower()}">'
         f'<div class="card-top">{media}<div class="card-meta"><div class="brand">{safe(brand)}</div>'
         f'<h3>{safe(name)}</h3><div class="badges"><span class="state {cls}">{safe(label)}</span>{flag}</div>'
         f'<div class="stock-title"><b>{safe(stock_text)}</b><span> unidades registradas</span>'
