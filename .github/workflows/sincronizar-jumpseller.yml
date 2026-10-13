@@ -1,6 +1,13 @@
 name: Actualizar catálogo desde Jumpseller
 
 on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'index.html'
+      - 'scripts/**'
+      - '.github/workflows/sincronizar-jumpseller.yml'
   schedule:
     - cron: '*/5 * * * *'
   workflow_dispatch:
